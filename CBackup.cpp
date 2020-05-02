@@ -22,6 +22,13 @@
 using namespace std;
 #endif /* __PROGTEST__ */
 
+/*
+template<class T>
+bool DefaultComparator(const T a, const T b)
+{
+	return a == b;
+}
+*/
 
 class DefaultComparator
 {
@@ -37,16 +44,18 @@ class DefaultComparator
 	}
 };
 
+
 template <typename _Type, typename _Comparator = DefaultComparator>
 class CSearch
 {
   public:
-	CSearch(_Comparator comp = DefaultComparator())
-	: m_Comp(comp)
-	{}
+	CSearch(/*function<bool(const )>*/)
+	{
 
-	~CSearch() = default;
+	}
 
+    // constructor with comparator parameter
+    // destructor (if needed)
 	CSearch ( const CSearch & src ) = delete;
 	CSearch & operator = ( const CSearch & src ) = delete;
 	void      Add     ( int           id,
@@ -72,9 +81,8 @@ class CSearch
   private:
 	map<int,_Type> m_Items;
 	_Type m_Sequence;
-	_Comparator m_Comp;
  
-	bool Searching(const _Type & img, const _Type & seq) const
+	static bool Searching(const _Type & img, const _Type & seq)
 	{
 		bool flag = false;
 		
@@ -83,7 +91,7 @@ class CSearch
 			auto k = i;
 			for (auto j = img.begin(); j != img.end(); j++, k++)
 			{
-				if (m_Comp(*k, *j))
+				if (*k == *j)
 				{
 					flag = true;
 				}

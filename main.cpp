@@ -50,10 +50,10 @@ bool Find ( const string & img, const string & seq )
 	
 	for (auto i = seq.begin(); i != seq.end(); i++)
 	{
-		int cnt = 0;
-		for (auto j = img.begin(); j != img.end(); j++)
+		auto k = i;
+		for (auto j = img.begin(); j != img.end(); j++, k++)
 		{
-			if (*(i + cnt) == *j)
+			if (*k == *j)
 			{
 				flag = true;
 			}
@@ -62,7 +62,6 @@ bool Find ( const string & img, const string & seq )
 				flag = false;
 				break;
 			}
-			cnt++;
 		}
 		if (flag)
 			return true;
@@ -70,18 +69,16 @@ bool Find ( const string & img, const string & seq )
 	return flag;
 
 }
+
 //-------------------------------------------------------------------------------------------------
-int main ( void )
+int main ()
 {
-
-//	CSearch<string> t0;
-
+/*
 	string img = "ld!";
 	string seq = "hello world!";
 	cout << boolalpha << Find(img, seq) << endl;
+*/
 
-
-/*
   CSearch <string> test1;
   test1 . Add    ( 0, "hello" );
   test1 . Add    ( 1, "world" );
@@ -89,8 +86,8 @@ int main ( void )
   test1 . Add    ( 3, "ell" );
   test1 . Add    ( 4, "hell" );
   assert ( test1 . Search ( "hello world!" ) == (set<int> { 0, 1, 2, 3, 4 }) );
-  assert ( test1 . Search ( "hEllo world!" ) == (set<int> { 1, 2 }) );*/
-/*
+  assert ( test1 . Search ( "hEllo world!" ) == (set<int> { 1, 2 }) );
+
   CSearch <string, bool (*)(const char &, const char &)> test2 ( upperCaseCompare );
   test2 . Add    ( 0, "hello" );
   test2 . Add    ( 1, "world" );
@@ -135,7 +132,7 @@ int main ( void )
   test8 . Add    ( 0, { 1, 6, 1, 6, 9, 12 } );
   test8 . Add    ( 1, { 9, 12, 7 } );
   assert ( test8 . Search ( list<int> { 1, 6, 1, 6, 1, 6, 9, 12, 8 } ) == (set<int> { 0 }) );
-*/
+
   return 0;
 }
 #endif /* __PROGTEST__ */
